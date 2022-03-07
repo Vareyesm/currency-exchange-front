@@ -1,0 +1,57 @@
+<div class="row container mt-3">
+  <div class="col">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Cambio de moneda</h5>
+        <div class="alert alert-danger" *ngIf="message">{{message}}</div>
+        <form name="form" (ngSubmit)="f.form.valid && onSubmit()" #f="ngForm">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="sourceCurrencyId">Moneda origen</label>
+              <select class="form-control" id="sourceCurrencyId" name="sourceCurrencyId" required
+                      [(ngModel)]="form.sourceCurrencyId" #sourceCurrencyId="ngModel" (change)="onChange()">
+                <option value="1">Sol (S/)</option>
+                <option value="2">Dólar (USD)</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="sourceCurrencyId.errors && f.submitted">
+                Source currency is required!
+              </small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="destinationCurrencyId">Moneda destino</label>
+              <select class="form-control" id="destinationCurrencyId" name="destinationCurrencyId" required
+                      [(ngModel)]="form.destinationCurrencyId" #destinationCurrencyId="ngModel" (change)="onChange()">
+                <option value="1">Sol (S/)</option>
+                <option value="2">Dólar (USD)</option>
+              </select>
+              <small class="form-text text-danger" *ngIf="destinationCurrencyId.errors && f.submitted">
+                Destination currency is required!
+              </small>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="exchangeRateValue">Valor tipo cambio</label>
+              <input type="text" class="form-control" id="exchangeRateValue" name="exchangeRateValue" required readonly
+                     [(ngModel)]="form.exchangeRateValue" #exchangeRateValue="ngModel">
+              <small class="form-text text-danger" *ngIf="exchangeRateValue.errors && f.submitted">
+                Exchange rate value is required!
+              </small>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="amountConvert">Cantidad a cambiar</label>
+              <input type="text" class="form-control" id="amountConvert" name="amountConvert" required
+                     [(ngModel)]="form.amountConvert" #amountConvert="ngModel">
+              <small class="form-text text-danger" *ngIf="amountConvert.errors && f.submitted">
+                Amount to converted is required!
+              </small>
+            </div>
+          </div>
+          <p><span>Resultado: <strong>{{convertedValue}}</strong></span></p>
+          <button type="submit" class="btn btn-primary">Convertir</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
